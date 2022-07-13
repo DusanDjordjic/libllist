@@ -4,14 +4,14 @@ BIN=main
 SRC=main.c
 OBJ=main.o
 LIBOBJ=linkedlist.o utils.o
-LIB=libll.a
+LIB=liblinkedlist.a
 
 all: $(BIN)
 
 lib: $(LIB)
 
-$(BIN): $(OBJ) $(LIBOBJ)
-	$(CC) -o $@ $(OBJ) $(LIBOBJ) 
+$(BIN): $(OBJ) $(LIB) 
+	$(CC) -o $@ $(OBJ) -L. -llinkedlist
 
 $(LIB): $(LIBOBJ) 
 	ar crs $@ $(LIBOBJ) 
