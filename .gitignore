@@ -1,0 +1,8 @@
+# Ignore executable
+main
+
+# Ignore object file
+*.o
+
+# Ignore library
+*.a
