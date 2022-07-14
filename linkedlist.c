@@ -1,79 +1,65 @@
+#include "linkedlist.h"
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdarg.h>
-#include "linkedlist.h"
 
-void print_list(node_t* head, iprint iprint)
+void print_list(node_t *head, iprint iprint)
 {
-    int i = 1;
-    while(head != NULL)
-    {
-        printf("Node id %d\n", head->id);
-        iprint(head->item);
-        ++i;
-        head = head->next;
-    }
+  while (head != NULL) {
+    printf("Node id %d\n", head->id);
+    iprint(head->item);
+    head = head->next;
+  }
 }
 
-node_t* create_node(int id, igen igen)
+node_t *create_node(int id, void *item)
 {
-    node_t* new_node = malloc(sizeof(node_t));
-    new_node->id = id;
-    new_node->next = NULL;
-    new_node->item = igen();
-    return new_node;
+  node_t *new_node = malloc(sizeof(node_t));
+  new_node->id = id;
+  new_node->next = NULL;
+  new_node->item = item;
+  return new_node;
 }
 
-void add_node_to_end(node_t **phead, igen igen)
+void add_node_to_end(node_t **phead, void *item)
 {
-    if(phead == NULL) return;
-    if(*phead == NULL)
-    {
-        *phead = create_node(1, igen);
-    }
+  if (phead == NULL)
+    return;
 
-    node_t* head = *phead;
-    
-    int next_id = 0;
+  if (*phead == NULL) {
+    *phead = create_node(1, item);
+    return;
+  }
 
-    if(head->next == NULL)
-    {
-        next_id = head->id + 1;
-        head->next = create_node(next_id, igen);
-        return;
-    }
+  node_t *head = *phead;
 
-    while(head->next != NULL) head = head->next;
+  int next_id;
 
-    next_id = head->id + 1;
-    head->next = create_node(next_id, igen);
+  while (head->next != NULL)
+    head = head->next;
+
+  next_id = head->id + 1;
+  head->next = create_node(next_id, item);
 }
 
-void free_node(node_t* node, ifree ifree)
+void free_node(node_t *node, ifree ifree)
 {
-    ifree(node->item);
-    free(node);
+  ifree(node->item);
+  free(node);
 }
 
-void free_list(node_t** phead, ifree ifree)
+void free_list(node_t **phead, ifree ifree)
 {
-    node_t* tmp;
-    node_t* head = *phead;
-    while(head != NULL)
-    {
-        tmp = head;
-        head = head->next;
-        free_node(tmp, ifree);
-    }
+  node_t *tmp;
+  node_t *head = *phead;
+  while (head != NULL) {
+    tmp = head;
+    head = head->next;
+    free_node(tmp, ifree);
+  }
 }
 
-node_t* find_node(node_t* head, icmp icmp) 
+node_t *find_node(node_t *head, icmp2 icmp)
 {
-    while(head != NULL)
-    {
-        if(icmp(head->item) == 0) return head;
-        head = head->next;
-    }
-
-    return NULL;
+  return NULL;
 }
