@@ -17,13 +17,15 @@ struct node {
 typedef struct node node_t;
 
 typedef void    (*iprint)   ();
-typedef void*   (*igen)     ();
 typedef void    (*ifree)    (void*);
-typedef char    (*icmp2)    (void*, void*);
 
 /* Pass an address of node_t and function that prints an item.
  * */
 void print_list(node_t* head, iprint);
+
+/* Prints nodes id
+ * */
+void print_node_id(node_t* head);
 
 /* First creates a new node and sets the next property to NULL.
  * Sets node id to be the passed id.
@@ -47,9 +49,7 @@ void add_node_to_end(node_t** head, void* item);
  * */
 void free_list(node_t** phead, ifree);
 
-/* For each node calls passed function and passes item to it.
- * If compare function returns 0, it returns pointer to node containing that item.
- * If the item was not found returns NULL
+/* Finds a node that has passed id
  * */
-node_t* find_node(node_t* head, icmp2);
+node_t* find_node(node_t* head, int id);
 #endif

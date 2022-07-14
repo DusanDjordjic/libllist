@@ -32,6 +32,17 @@ int main(int argc, char* argv[])
 
     print_list(head, print_item);
 
+    node_t* found_node = find_node(head, 3);
+
+    if(found_node == NULL)
+    {
+        printf("Could not find node with an id of 3\n");
+    }
+    else
+    {
+        print_node_id(found_node);
+    }
+
     free_list(&head, free_item);
     return 0;
 }
