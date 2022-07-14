@@ -3,18 +3,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void print_list(node_t *head, iprint iprint)
+void print_list(node_t *head, node_print node_print)
 {
     while (head != NULL) {
-        print_node_id(head);
-        iprint(head->item);
+        node_print(head);
         head = head->next;
     }
-}
-
-void print_node_id(node_t* head)
-{
-    printf("Node id %d\n", head->id);
 }
 
 node_t *create_node(int id, void *item)
@@ -47,13 +41,13 @@ void add_node_to_end(node_t **phead, void *item)
     head->next = create_node(next_id, item);
 }
 
-void free_node(node_t *node, ifree ifree)
+void free_node(node_t *node, item_free ifree)
 {
     ifree(node->item);
     free(node);
 }
 
-void free_list(node_t **phead, ifree ifree)
+void free_list(node_t **phead, item_free ifree)
 {
     node_t *tmp;
     node_t *head = *phead;
@@ -65,7 +59,7 @@ void free_list(node_t **phead, ifree ifree)
     }
 }
 
-node_t *find_node(node_t *head, int id)
+node_t *find_node_by_id(node_t *head, int id)
 {
     while(head != NULL)
     {

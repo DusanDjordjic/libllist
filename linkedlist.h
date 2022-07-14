@@ -16,16 +16,12 @@ struct node {
 
 typedef struct node node_t;
 
-typedef void    (*iprint)   ();
-typedef void    (*ifree)    (void*);
+typedef void    (*node_print)   (node_t*);
+typedef void    (*item_free)    (void*);
 
 /* Pass an address of node_t and function that prints an item.
  * */
-void print_list(node_t* head, iprint);
-
-/* Prints nodes id
- * */
-void print_node_id(node_t* head);
+void print_list(node_t* head, node_print);
 
 /* First creates a new node and sets the next property to NULL.
  * Sets node id to be the passed id.
@@ -47,9 +43,9 @@ void add_node_to_end(node_t** head, void* item);
 /* For each node until the end calls passed function that frees the item.
  * After freeing the item frees the node itself.
  * */
-void free_list(node_t** phead, ifree);
+void free_list(node_t** phead, item_free);
 
 /* Finds a node that has passed id
  * */
-node_t* find_node(node_t* head, int id);
+node_t* find_node_by_id(node_t* head, int id);
 #endif

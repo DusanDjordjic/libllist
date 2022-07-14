@@ -5,7 +5,7 @@
 #define CASTV *(item_t*)
 #define CASTP  (item_t*)
 
-void print_item(void* pitem);
+void print_node(node_t* node);
 void* create_item();
 void free_item(void* item);
 char compare_item(void* item);
@@ -30,17 +30,17 @@ int main(int argc, char* argv[])
 
     add_node_to_end(&head, new_item3);
 
-    print_list(head, print_item);
+    print_list(head, print_node);
 
-    node_t* found_node = find_node(head, 3);
+    node_t* found_node = find_node_by_id(head, 10);
 
     if(found_node == NULL)
     {
-        printf("Could not find node with an id of 3\n");
+        printf("Could not find node with an id of 10\n");
     }
     else
     {
-        print_node_id(found_node);
+        print_node(found_node);
     }
 
     free_list(&head, free_item);
@@ -63,10 +63,9 @@ void* create_item()
     return new_item;
 }
 
-void print_item(void* pitem)
+void print_node(node_t* node)
 {
-    item_t* item = CASTP pitem;
-    printf("Item value is %d\n", item->value);
+    printf("%d : Item value is %d\n", node->id, (CASTP node->item)->value);
 }
 
 char compare_item(void* item)
