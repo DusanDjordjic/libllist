@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "linkedlist.h"
+#include "llist.h"
 
 #define CASTV *(item_t*)
 #define CASTP  (item_t*)
@@ -25,11 +25,8 @@ int main(int argc, char* argv[])
     void* new_item3 = create_item();
 
     head = create_node(1, new_item1); 
-
     add_node_to_end(&head, new_item2);
-
     add_node_to_end(&head, new_item3);
-
     print_list(head, print_node);
 
     node_t* found_node = find_node_by_id(head, 10);
@@ -44,6 +41,7 @@ int main(int argc, char* argv[])
     }
 
     free_list(&head, free_item);
+
     return 0;
 }
 
@@ -68,7 +66,3 @@ void print_node(node_t* node)
     printf("%d : Item value is %d\n", node->id, (CASTP node->item)->value);
 }
 
-char compare_item(void* item)
-{
-    return (CASTP item)->value > 10 ? 0 : -1;
-}

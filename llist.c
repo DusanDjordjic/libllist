@@ -1,11 +1,12 @@
-#include "linkedlist.h"
+#include "llist.h"
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 void print_list(node_t *head, node_print node_print)
 {
-    while (head != NULL) {
+    while (head != NULL)
+    {
         node_print(head);
         head = head->next;
     }
@@ -23,16 +24,14 @@ node_t *create_node(int id, void *item)
 void add_node_to_end(node_t **phead, void *item)
 {
     if (phead == NULL) return;
-
     if (*phead == NULL)
     {
         *phead = create_node(1, item);
         return;
     }
 
-    node_t *head = *phead;
-
     int next_id;
+    node_t *head = *phead;
 
     while (head->next != NULL)
         head = head->next;
@@ -65,7 +64,6 @@ node_t *find_node_by_id(node_t *head, int id)
     {
         if(head->id == id)
             return head;
-
         head = head->next;
     }
     return NULL;
