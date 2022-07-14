@@ -1,5 +1,6 @@
 # Ignore executable
 main
+dmain
 
 # Ignore object file
 *.o
